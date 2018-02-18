@@ -1,0 +1,9 @@
+/.vs
+/Visual Micro
+/__vm
+/Debug
+/Release
+*.atsuo
+*.sln
+*.vcxproj
+*.vcxproj.filters
