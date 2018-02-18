@@ -47,16 +47,6 @@ void handleCommandReadRegister() {
         responseBufferSize += 1;
         break;
 
-      case ECU_REGISTER_LEFT_O2:
-        responseBuffer[responseBufferSize] = 0x00;
-        responseBufferSize += 1;
-        break;
-
-      case ECU_REGISTER_RIGHT_O2:
-        responseBuffer[responseBufferSize] = 0x00;
-        responseBufferSize += 1;
-        break;
-
       case ECU_REGISTER_VEHICLE_SPEED:
         currentSpeed = map(analogRead(A0), 0, 1023, 0, 400) / 2;
         responseBuffer[responseBufferSize] = currentSpeed;
@@ -70,6 +60,23 @@ void handleCommandReadRegister() {
         currentIgnitionTiming = 110 - map(analogRead(A0), 0, 1023, 10, 30);
         responseBuffer[responseBufferSize] = currentIgnitionTiming;
         responseBufferSize += 1;
+
+      case ECU_REGISTER_LEFT_O2:
+      case ECU_REGISTER_RIGHT_O2:
+      case ECU_REGISTER_AAC_VALVE:
+      case ECU_REGISTER_AF_ALPHA:
+      case ECU_REGISTER_DIGITAL_BIT_REGISTER:
+      case ECU_REGISTER_DIGITAL_CONTROL_REGISTER_E:
+      case ECU_REGISTER_DIGITAL_CONTROL_REGISTER_F:
+      case ECU_REGISTER_INJECTION_TIME_LSB:
+      case ECU_REGISTER_INJECTION_TIME_MSB:
+      case ECU_REGISTER_LEFT_MAF_MSB:
+      case ECU_REGISTER_LEFT_MAF_LSB:
+      case ECU_REGISTER_RIGHT_MAF_MSB:
+      case ECU_REGISTER_RIGHT_MAF_LSB:
+        responseBuffer[responseBufferSize] = 0x00;
+        responseBufferSize += 1;
+        break;
 
       case ECU_COMMAND_READ_REGISTER:
         break;
